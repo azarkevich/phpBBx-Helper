@@ -1,4 +1,4 @@
-content	onliner-by-helper	content/
+content	phpBBx-helper	content/
 content	phpBBx-helper	content/	contentaccessible=yes
 
 overlay	chrome://browser/content/browser.xul	chrome://phpBBx-helper/content/firefoxOverlay.xul

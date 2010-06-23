@@ -4,7 +4,7 @@
 
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="prefwindow-options"
-			title="Настройки Onliner.By + Zelenybor.By helper" 
+			title="Настройки phpBBx helper" 
 			sizemode="normal"
 			persist="screenX screenY width height"
 			>
