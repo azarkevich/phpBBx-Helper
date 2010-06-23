@@ -1,4 +1,4 @@
-function onliner_by_utils_install(doc)
+function phpBBx_utils_install(doc)
 {
 	doc.execXPath = function (xpath, ctx, nsResolver)
 	{
@@ -57,7 +57,7 @@ function phpBBx_onGetClipboardText(e)
 	var dataHolder = e.target.getElementById('phpBBx_clipboard');
 	if(dataHolder == null)
 	{
-		dataHolder = e.target.createElement('OLBYClipboard');
+		dataHolder = e.target.createElement('phpBBxClipboard');
 		dataHolder.id = 'phpBBx_clipboard';
 		e.target.documentElement.appendChild(dataHolder);
 	}
