@@ -29,7 +29,7 @@ OLBY.Sidebar.toggleSidebar = function()
 	splitter.hidden = hide;
 }
 
-function olby_tab_selected()
+function phpBBx_tab_selected()
 {
 	var tabbrowser = document.getElementsByTagName('tabbrowser')[0];
 	var doc = tabbrowser.selectedBrowser.contentDocument;
@@ -46,5 +46,5 @@ function olby_tab_selected()
 var tabbrowser = document.getElementsByTagName('tabbrowser')[0];
 if(tabbrowser != null)
 {
-	tabbrowser.tabContainer.addEventListener('select', olby_tab_selected, false);
+	tabbrowser.tabContainer.addEventListener('select', phpBBx_tab_selected, false);
 }

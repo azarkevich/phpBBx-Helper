@@ -47,7 +47,7 @@
 			</fileset>
 		</replaceregexp>
 
-		<zip destfile="${path.build}/phpBBx.xpi" basedir="${path.build.src}" includes="**/*" />
+		<zip destfile="${path.build}/phpBBx.xpi" basedir="${path.build.src}" includes="**/*" level="9" />
 
 	</target>
 

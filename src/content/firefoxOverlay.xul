@@ -10,24 +10,24 @@
 			class="statusbarpanel-menu-iconic"
 			tooltiptext="%EXT.NAME% (версия %EXT.VERSION%)"
 			src="chrome://phpBBx-helper/skin/icon.png"
-			onclick="olby_OnStatusPanelBtnClik(event);"
-			onload="olby_eanbleChanged();" />
+			onclick="phpBBx_OnStatusPanelBtnClik(event);"
+			onload="phpBBx_eanbleChanged();" />
 
-		<menupopup id="phpBBx-helper-statusbar-menu" onpopupshowing="olby_OnShowStatusbarPopupMenu(event)"> 
+		<menupopup id="phpBBx-helper-statusbar-menu" onpopupshowing="phpBBx_OnShowStatusbarPopupMenu(event)"> 
 			<menuitem id="phpBBx-helper-enable" label="Включить" tooltip="Включает и отключает расширение" 
-						type="checkbox" oncommand="olby_enableAddin(!olby_isAddinEnabled());"/>
+						type="checkbox" oncommand="phpBBx_enableAddin(!phpBBx_isAddinEnabled());"/>
 			<menuseparator />
-			<!--menuitem id="phpBBx-helper-popup-find-tool" label="Panel" command="olby_toggleSidebar"/-->
-			<menuitem id="phpBBx-helper-popup-options" label="Options" command="olby_showOptions"/>
+			<!--menuitem id="phpBBx-helper-popup-find-tool" label="Panel" command="phpBBx_toggleSidebar"/-->
+			<menuitem id="phpBBx-helper-popup-options" label="Options" command="phpBBx_showOptions"/>
 		</menupopup>
 	</statusbar>
 
 	<script>
-		function olby_OnStatusPanelBtnClik(ev)
+		function phpBBx_OnStatusPanelBtnClik(ev)
 		{
 			if(ev.button == 0)
 			{
-				olby_enableAddin(!olby_isAddinEnabled());
+				phpBBx_enableAddin(!phpBBx_isAddinEnabled());
 			}
 			else if(ev.button == 2)
 			{
@@ -39,28 +39,28 @@
 			}
 		}
 		
-		function olby_eanbleChanged()
+		function phpBBx_eanbleChanged()
 		{
-			var img = "chrome://phpBBx-helper/skin/" + (olby_isAddinEnabled() ? "icon.png" : "icon-gray.png");
+			var img = "chrome://phpBBx-helper/skin/" + (phpBBx_isAddinEnabled() ? "icon.png" : "icon-gray.png");
 			document.getElementById('phpBBx-helper-statusbar-panel').setAttribute('src', img);
-			document.getElementById('phpBBx-helper-enable').setAttribute('checked', olby_isAddinEnabled());
+			document.getElementById('phpBBx-helper-enable').setAttribute('checked', phpBBx_isAddinEnabled());
 		}
 
-		function olby_OnShowStatusbarPopupMenu(ev)
+		function phpBBx_OnShowStatusbarPopupMenu(ev)
 		{
-			document.getElementById('phpBBx-helper-enable').setAttribute('checked', olby_isAddinEnabled());
+			document.getElementById('phpBBx-helper-enable').setAttribute('checked', phpBBx_isAddinEnabled());
 		}
 
 		var observer={
 			observe: function(subject, topic, prefName) {
-					olby_eanbleChanged();
+					phpBBx_eanbleChanged();
 			}
 		};
-		olby_prefBranch.addObserver("enabled", observer, false);
+		phpBBx_prefBranch.addObserver("enabled", observer, false);
 	</script>
 
 	<!-- Commands -->
 	<commandset id="mainCommandSet">
-		<command id="olby_showOptions" oncommand="window.openDialog('chrome://phpBBx-helper/content/options/options.xul', 'phpBBx-helper-options', 'chrome,modal,toolbar,resizable=yes');"/>
+		<command id="phpBBx_showOptions" oncommand="window.openDialog('chrome://phpBBx-helper/content/options/options.xul', 'phpBBx-helper-options', 'chrome,modal,toolbar,resizable=yes');"/>
 	</commandset>
 </overlay>

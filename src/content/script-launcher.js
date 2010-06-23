@@ -11,7 +11,7 @@ OLBY.getString = function(name)
 	return this.pluginsStringBundle.GetStringFromName(name);
 }
 
-function olby_loadDependencies()
+function phpBBx_loadDependencies()
 {
 	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
 		   .getService(Components.interfaces.mozIJSSubScriptLoader);
@@ -20,14 +20,14 @@ function olby_loadDependencies()
 	loader.loadSubScript('chrome://phpBBx-helper/content/page_parser.js');
 	loader.loadSubScript('chrome://phpBBx-helper/content/plugins-manager.js');
 
-	OLBY.Plugins = olby_loadPlugins();
+	OLBY.Plugins = phpBBx_loadPlugins();
 }
 
-function olby_OnContentLoad(e)
+function phpBBx_OnContentLoad(e)
 {
 	try
 	{
-		if(olby_isAddinEnabled() == false)
+		if(phpBBx_isAddinEnabled() == false)
 			return;
 
 		if(e.target == null || e.target.location == null)
@@ -39,7 +39,7 @@ function olby_OnContentLoad(e)
 		
 		var href = doc.location.href;
 
-		var force = olby_getForce();
+		var force = phpBBx_getForce();
 		if(force == null)
 		{
 			var onliner = false;
@@ -54,21 +54,21 @@ function olby_OnContentLoad(e)
 			force.site = onliner ? "olby" : "zeby";
 		}
 
-		doc.olby_site = force.site;
+		doc.phpBBx_site = force.site;
 			
-		if(olby_reloadEachTime)
+		if(phpBBx_reloadEachTime)
 		{
-			olby_loadDependencies();
+			phpBBx_loadDependencies();
 		}
 		
 		onliner_by_utils_install(doc);
 		
-		doc.oz_data = new OLBY_PageParser(doc, force.page);
+		doc.oz_data = new phpBBx_PageParser(doc, force.page);
 		
-		doc.addEventListener("Olby_PageExpanded", 
+		doc.addEventListener("phpBBx_PageExpanded", 
 			function(e)
 			{
-				doc.oz_data = new OLBY_PageParser(doc, force.page);
+				doc.oz_data = new phpBBx_PageParser(doc, force.page);
 				
 				OLBY.Plugins.forEach(
 					function(plugin)
@@ -101,62 +101,62 @@ function olby_OnContentLoad(e)
 	};
 }
 
-function olby_getForce()
+function phpBBx_getForce()
 {
-	if(olby_prefBranch.getBoolPref("force") == false)
+	if(phpBBx_prefBranch.getBoolPref("force") == false)
 		return null;
 	
 	var force = new Object();
-	force.site = olby_prefBranch.getCharPref("force.site");
-	force.page = olby_prefBranch.getCharPref("force.page");
+	force.site = phpBBx_prefBranch.getCharPref("force.site");
+	force.page = phpBBx_prefBranch.getCharPref("force.page");
 	return force;
 }
 
-function olby_isAddinEnabled()
+function phpBBx_isAddinEnabled()
 {
-	if(olby_prefBranch.prefHasUserValue("enabled") == false) 
+	if(phpBBx_prefBranch.prefHasUserValue("enabled") == false) 
 		return true;
-	return olby_prefBranch.getBoolPref("enabled");
+	return phpBBx_prefBranch.getBoolPref("enabled");
 }
 
-function olby_enableAddin(enable)
+function phpBBx_enableAddin(enable)
 {
-	olby_prefBranch.setBoolPref("enabled", enable);
+	phpBBx_prefBranch.setBoolPref("enabled", enable);
 }
 
-function olby_OnLoad()
+function phpBBx_OnLoad()
 {
 	var	appcontent = window.document.getElementById("appcontent");
 	if (appcontent && appcontent.onliner_by_helper_done == null)
 	{
 		appcontent.onliner_by_helper_done = true;
-		appcontent.addEventListener("DOMContentLoaded", olby_OnContentLoad, false);
+		appcontent.addEventListener("DOMContentLoaded", phpBBx_OnContentLoad, false);
 	}
 }
 
-function olby_OnUnload()
+function phpBBx_OnUnload()
 {
 	//remove now unnecessary listeners
 	var	appcontent = window.document.getElementById("appcontent");
-	appcontent.removeEventListener("DOMContentLoaded", olby_OnContentLoad, false);
+	appcontent.removeEventListener("DOMContentLoaded", phpBBx_OnContentLoad, false);
 
-	window.removeEventListener('load', olby_OnLoad, false);
-	window.removeEventListener('unload', olby_OnUnload, false);
+	window.removeEventListener('load', phpBBx_OnLoad, false);
+	window.removeEventListener('unload', phpBBx_OnUnload, false);
 }
 
-window.addEventListener('load', olby_OnLoad, false);
-window.addEventListener('unload', olby_OnUnload, false);
+window.addEventListener('load', phpBBx_OnLoad, false);
+window.addEventListener('unload', phpBBx_OnUnload, false);
 
-olby_prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
+phpBBx_prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefService)
 		.getBranch("extensions.phpBBx-helper.");
-olby_prefBranch.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+phpBBx_prefBranch.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
 
-olby_reloadEachTime = false;
-if(olby_prefBranch.prefHasUserValue("ReloadEachTime"))
-	olby_reloadEachTime = olby_prefBranch.getBoolPref("ReloadEachTime");
+phpBBx_reloadEachTime = false;
+if(phpBBx_prefBranch.prefHasUserValue("ReloadEachTime"))
+	phpBBx_reloadEachTime = phpBBx_prefBranch.getBoolPref("ReloadEachTime");
 
-olby_loadDependencies();
+phpBBx_loadDependencies();
 /*
 var cacheService = Components.classes["@mozilla.org/network/cache-service;1"]
 	.getService(Components.interfaces.nsICacheService);

@@ -1,4 +1,4 @@
-function olby_buildOptions()
+function phpBBx_buildOptions()
 {
 	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]  
 		.getService(Components.interfaces.nsIWindowMediator); 
@@ -75,4 +75,4 @@ function add_plugin_feature(plugin, feature, gb)
 	gb.appendChild(check);
 }
 
-olby_buildOptions();
+phpBBx_buildOptions();

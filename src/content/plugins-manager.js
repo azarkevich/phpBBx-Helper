@@ -1,4 +1,4 @@
-function olby_getContentDir()
+function phpBBx_getContentDir()
 {
 	var il = Components.classes["@mozilla.org/extensions/manager;1"]
 			   .getService(Components.interfaces.nsIExtensionManager)
@@ -33,9 +33,9 @@ function olby_getContentDir()
 	return dir;
 }
 
-function olby_getPlugins()
+function phpBBx_getPlugins()
 {
-	var dir = olby_getContentDir();
+	var dir = phpBBx_getContentDir();
 
 	dir.append("plugins");
 	
@@ -51,12 +51,12 @@ function olby_getPlugins()
 	return array;
 }
 
-function olby_loadPlugins()
+function phpBBx_loadPlugins()
 {
 	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
 		.getService(Components.interfaces.mozIJSSubScriptLoader);
 
-	var array = olby_getPlugins();
+	var array = phpBBx_getPlugins();
 	var plugins = new Array();
 	for(var i=0;i<array.length;i++)
 	{

@@ -1,4 +1,4 @@
-function OLBY_PageParser(doc, page)
+function phpBBx_PageParser(doc, page)
 {
 	if(page == null)
 		page = doc.location.href.replace(/[^:]*:\/\/[^\/]*\//, '');
@@ -18,13 +18,13 @@ function OLBY_PageParser(doc, page)
 	
 	if(/viewtopic\.php/.test(page))
 	{
-		olby_parse_viewtopic_page(doc, this);
+		phpBBx_parse_viewtopic_page(doc, this);
 	}
 	
 	if(/memberlist\.php/.test(page))
 	{
 		this.memberlist = new Object();
-		this.pager = olby_parse_pager(doc, this);
+		this.pager = phpBBx_parse_pager(doc, this);
 		if(this.pager != null)
 			this.pager.page_size = 25;
 	}
@@ -34,23 +34,23 @@ function OLBY_PageParser(doc, page)
 		var re = /viewforum.php\?f=(\d+)/;
 		var res = re.exec(doc.location.href);
 		if(res != null)
-			this.page_id = doc.olby_site + '-' + res[1];
-		olby_parse_viewforum_page(doc, this);
+			this.page_id = doc.phpBBx_site + '-' + res[1];
+		phpBBx_parse_viewforum_page(doc, this);
 	}
 
 	if(/posting\.php/.test(page) || /privmsg\.php/.test(page) || /ucp\.php/.test(page))
 	{
-		olby_parse_posting_page(doc, this);
+		phpBBx_parse_posting_page(doc, this);
 	}
 
 	if(/search\.php/.test(page))
 	{
-		this.page_id = doc.olby_site + '-search';
+		this.page_id = doc.phpBBx_site + '-search';
 
 		this.posts = doc.execXPath("//span[@class='postbody']");
-		olby_parse_pens(doc, this);
+		phpBBx_parse_pens(doc, this);
 
-		this.pager = olby_parse_pager(doc, this);
+		this.pager = phpBBx_parse_pager(doc, this);
 		if(this.pager != null)
 			this.pager.page_size = 20;
 	}
@@ -62,42 +62,42 @@ function OLBY_PageParser(doc, page)
 	}
 	
 	//new
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 		this.unread_links = doc.execXPath("//span[@class='nav']/a[contains(@href, 'view=newest')]");
 	else
 		this.unread_links = doc.execXPath("//a[contains(@href, 'view=unread#unread')]");
 }
 
-function olby_parse_pens(doc, data)
+function phpBBx_parse_pens(doc, data)
 {
 	data.pens = doc.execXPath("//img[contains(@src, 'pen_yellow.gif') or contains(@src, 'pen_red.gif') or contains(@src, 'pen_black.gif')]/ancestor::table");
 }
 
-function olby_parse_posting_page(doc, data)
+function phpBBx_parse_posting_page(doc, data)
 {
 	data.posting = new Object();
 
-	olby_parse_reply(doc, data);
+	phpBBx_parse_reply(doc, data);
 
 	data.posts = doc.execXPath("//span[@class='postbody']");
 }
 
-function olby_parse_viewtopic_page(doc, data)
+function phpBBx_parse_viewtopic_page(doc, data)
 {
 	data.viewtopic = new Object();
 
-	data.pager = olby_parse_pager(doc, data);
+	data.pager = phpBBx_parse_pager(doc, data);
 	if(data.pager != null)
 		data.pager.page_size = 20;
 	
-	olby_parse_reply(doc, data);
+	phpBBx_parse_reply(doc, data);
 	
 	data.posts = doc.execXPath("//span[starts-with(@id, 'postid_')]");
 	
-	olby_parse_pens(doc, data);
+	phpBBx_parse_pens(doc, data);
 }
 
-function olby_parse_reply(doc, data)
+function phpBBx_parse_reply(doc, data)
 {
 	var textarea = doc.execXPathOne("//textarea[@id='message' or @id='input']");
 	if(textarea != null)
@@ -117,19 +117,19 @@ function olby_parse_reply(doc, data)
 	}
 }
 
-function olby_parse_viewforum_page(doc, data)
+function phpBBx_parse_viewforum_page(doc, data)
 {
 	data.viewforum = new Object();
 
-	data.pager = olby_parse_pager(doc, data);
+	data.pager = phpBBx_parse_pager(doc, data);
 	if(data.pager != null)
 		data.pager.page_size = 50;
 }
 
-function olby_parse_pager(doc, data)
+function phpBBx_parse_pager(doc, data)
 {
 	var cur = null;
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		// find current and last page
 		cur = doc.execXPath("//span[@class='snh_pagination']/a[@class='active']");
@@ -154,7 +154,7 @@ function olby_parse_pager(doc, data)
 
 	pager.cur_page = Number(cur[0].textContent);
 
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		pager.panels = doc.execXPath("//span[@class='snh_pagination']");
 	}
@@ -170,7 +170,7 @@ function olby_parse_pager(doc, data)
 
 	var allPages = null;
 
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		// calc last page & href template
 		allPages = doc.execXPath("//span[@class='snh_pagination']/a[starts-with(@href, 'viewtopic.php?') or starts-with(@href, 'viewforum.php?') or starts-with(@href, 'search.php?')]");
@@ -192,7 +192,7 @@ function olby_parse_pager(doc, data)
 			pager.href_template = a.href;
 	});
 	
-	if(doc.olby_site == "zeby" && /&start=\d+/.test(pager.href_template) == false)
+	if(doc.phpBBx_site == "zeby" && /&start=\d+/.test(pager.href_template) == false)
 		pager.href_template += "&start=0";
 
 	return pager;

@@ -1,4 +1,4 @@
-function olby_set_tab_icon(doc, newUrl)
+function phpBBx_set_tab_icon(doc, newUrl)
 {
 	var tabbrowser = document.getElementsByTagName('tabbrowser')[0];
 	if(tabbrowser == null)
@@ -26,14 +26,14 @@ function modifyPage(doc, expanded)
 	if(pager == null || pager.cur_page == null || (pager.cur_page == pager.max_page && expanded == null))
 		return;
 
-	var site = doc.olby_site;
+	var site = doc.phpBBx_site;
 	if(expanded == null)
 	{
-		olby_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-fwd.png');
+		phpBBx_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-fwd.png');
 	}
 	else
 	{
-		olby_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-all.png');
+		phpBBx_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-all.png');
 	}
 }
 

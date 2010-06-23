@@ -37,10 +37,10 @@ function onliner_by_utils_install(doc)
 		return res[0];
 	}
 	
-	doc.addEventListener("OnGetClipboardText", olby_onGetClipboardText, false);
+	doc.addEventListener("OnGetClipboardText", phpBBx_onGetClipboardText, false);
 }
 
-function olby_onGetClipboardText(e)
+function phpBBx_onGetClipboardText(e)
 {
 	var clip = Components.classes["@mozilla.org/widget/clipboard;1"]
 		.getService(Components.interfaces.nsIClipboard);
@@ -54,11 +54,11 @@ function olby_onGetClipboardText(e)
 	var strLength = new Object();  
 	trans.getTransferData("text/unicode", str, strLength);
 	
-	var dataHolder = e.target.getElementById('olby_clipboard');
+	var dataHolder = e.target.getElementById('phpBBx_clipboard');
 	if(dataHolder == null)
 	{
 		dataHolder = e.target.createElement('OLBYClipboard');
-		dataHolder.id = 'olby_clipboard';
+		dataHolder.id = 'phpBBx_clipboard';
 		e.target.documentElement.appendChild(dataHolder);
 	}
 	
@@ -71,7 +71,7 @@ function olby_onGetClipboardText(e)
 	}
 }
 
-function olby_install_script(doc, funct)
+function phpBBx_install_script(doc, funct)
 {
 	var body = doc.execXPathOne("/html/body");
 	if(body == null)

@@ -193,14 +193,14 @@ function clearQuote()
 	textarea.focus();
 }
 
-function olby_UrlQuote()
+function phpBBx_UrlQuote()
 {
 	var event = document.createEvent("UIEvents");
 	event.initEvent("OnGetClipboardText", true, false);
 	document.dispatchEvent(event);
 	
 	var urlText = null;
-	var clip = document.getElementById('olby_clipboard');
+	var clip = document.getElementById('phpBBx_clipboard');
 	if(clip != null)
 	{
 		if(/^[^:]+:\/\//.test(clip.textContent))
@@ -240,7 +240,7 @@ function modifyReplyPage(doc)
 {
 	this.createQuoteButtons(doc);
 
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		var breakQuoteTd = doc.createElement('TD');
 		breakQuoteTd.appendChild(doc.oz_data.reply.breakQuote);
@@ -285,7 +285,7 @@ function modifyReplyPage(doc)
 			select.parentNode.insertBefore(apply, select.nextSibling);
 		}
 	}
-	else if(doc.olby_site == "zeby")
+	else if(doc.phpBBx_site == "zeby")
 	{
 		var url = doc.oz_data.reply.url;
 		
@@ -304,7 +304,7 @@ function modifyQuickReply(doc)
 {
 	this.createQuoteButtons(doc);
 
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		var breakQuoteTd = doc.createElement('TD');
 		breakQuoteTd.appendChild(doc.oz_data.reply.breakQuote);
@@ -346,22 +346,22 @@ function createQuoteButtons(doc)
 
 	reply.moderBtn.setAttribute('onclick', this.moder.toString().replace("function moder()", ""));
 	reply.moderBtn.id = 'moder-btn';
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		reply.moderBtn.setAttribute('font-size', '9');
 	}
-	else if(doc.olby_site == "zeby")
+	else if(doc.phpBBx_site == "zeby")
 	{
 		reply.moderBtn.setAttribute('font-size', '85');
 	}
 
-	if(doc.olby_site == "olby")
+	if(doc.phpBBx_site == "olby")
 	{
 		reply.breakQuote.className = 'button';
 		reply.stripIntQuotes.className = 'button';
 		reply.moderBtn.className = 'button';
 	}
-	else if(doc.olby_site == "zeby")
+	else if(doc.phpBBx_site == "zeby")
 	{
 		reply.breakQuote.className = 'button2';
 		reply.stripIntQuotes.className = 'button2';
@@ -376,8 +376,8 @@ function modifyPage(doc)
 		
 	if(doc.oz_data.reply != null && doc.oz_data.reply.url != null)
 	{
-		olby_install_script(doc, this.olby_UrlQuote);
-		doc.oz_data.reply.url.setAttribute('onclick', 'olby_UrlQuote()');
+		phpBBx_install_script(doc, this.phpBBx_UrlQuote);
+		doc.oz_data.reply.url.setAttribute('onclick', 'phpBBx_UrlQuote()');
 	}
 
 	if(doc.oz_data.reply != null)

@@ -14,7 +14,7 @@ function handleNode(node)
 	}
 }
 
-function olby_toggle_display(id)
+function phpBBx_toggle_display(id)
 {
 	var el = document.getElementById(id);
 	if(el.style.display == "none")
@@ -28,7 +28,7 @@ function modifyPage(doc)
 	if(this.features.enabled == false)
 		return;
 	
-	olby_install_script(doc, this.olby_toggle_display); 
+	phpBBx_install_script(doc, this.phpBBx_toggle_display); 
 	
 	var br = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefBranch)
@@ -68,7 +68,7 @@ function modifyPage(doc)
 			onoff.style.border = 'thin dashed';
 			onoff.style.padding = '2px';
 			onoff.style.cursor = 'pointer';
-			onoff.setAttribute("onclick", "olby_toggle_display('" + it.id + "')");
+			onoff.setAttribute("onclick", "phpBBx_toggle_display('" + it.id + "')");
 
 			it.parentNode.insertBefore(onoff, it);
 		}

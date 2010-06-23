@@ -194,9 +194,9 @@ function modifyPage(doc)
 		if(doc.oz_data.pens != null)
 		{
 			doc.oz_data.pens.forEach(function(node) {
-				var tn = doc.execXPath("//td[@class='gensmall' and not(@olby_pan_explained)]/text()", node);
+				var tn = doc.execXPath("//td[@class='gensmall' and not(@phpBBx_pan_explained)]/text()", node);
 				tn.forEach(function(t) { this.modifyTextNode(doc, t)}, this);
-				tn.forEach(function(t) { if(t.parentNode != null) t.parentNode.setAttribute('olby_pan_explained', '') })
+				tn.forEach(function(t) { if(t.parentNode != null) t.parentNode.setAttribute('phpBBx_pan_explained', '') })
 			}, this);
 		}
 	}

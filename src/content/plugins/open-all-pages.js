@@ -1,9 +1,9 @@
 // installable scripts
-function olby_create_append_pages_dialog()
+function phpBBx_create_append_pages_dialog()
 {
 	var dialog = document.createElement('div');
 
-	dialog.id = 'olby_append_pages_dialog';
+	dialog.id = 'phpBBx_append_pages_dialog';
 	dialog.style.position = 'fixed';
 	dialog.style.backgroundColor = 'yellow';
 	dialog.style.borderStyle = 'solid';
@@ -49,10 +49,10 @@ function olby_create_append_pages_dialog()
 	dialog.state = false;
 
     document.body.appendChild(dialog);
-	window.olby_append_pages_dialog = dialog;
+	window.phpBBx_append_pages_dialog = dialog;
 }
 
-function olby_open_all_next()
+function phpBBx_open_all_next()
 {
 	var pager = document.oz_data.pager;
 	if(pager == null)
@@ -71,7 +71,7 @@ function olby_open_all_next()
 	}
 }
 
-function olby_updated_topic_sel_unsel(btn)
+function phpBBx_updated_topic_sel_unsel(btn)
 {
 	var mode = btn.getAttribute('mode');
 	var checks = document.execXPath('//input[@open_all_check]');
@@ -106,10 +106,10 @@ function olby_updated_topic_sel_unsel(btn)
 	if(f != null)
 		checks.forEach(f);
 	
-	olby_updated_topic_check_changed(false);
+	phpBBx_updated_topic_check_changed(false);
 }
 
-function olby_updated_topic_check_changed(initiated_by_check)
+function phpBBx_updated_topic_check_changed(initiated_by_check)
 {
 	var checkedCount = 0;
 	document.execXPath('//input[@open_all_check]')
@@ -123,7 +123,7 @@ function olby_updated_topic_check_changed(initiated_by_check)
 		}
 	);
 
-	[document.getElementById("olby_open_all_updated_topics"), document.getElementById("olby_open_all_updated_pages")]
+	[document.getElementById("phpBBx_open_all_updated_topics"), document.getElementById("phpBBx_open_all_updated_pages")]
 	.forEach(
 		function(l)
 		{
@@ -134,9 +134,9 @@ function olby_updated_topic_check_changed(initiated_by_check)
 		}
 	);
 	
-	var btnSelUnsel = document.getElementById("olby_open_all_sel_btn");
+	var btnSelUnsel = document.getElementById("phpBBx_open_all_sel_btn");
 		
-	var span = document.getElementById("olby_open_all_updated_span");
+	var span = document.getElementById("phpBBx_open_all_updated_span");
 	if(checkedCount == 0)
 	{
 		span.setAttribute('style', 'display: none');
@@ -157,11 +157,11 @@ function olby_updated_topic_check_changed(initiated_by_check)
 	}
 }
 
-function olby_open_selected_topics(rec)
+function phpBBx_open_selected_topics(rec)
 {
 	// notify extension about open pages (for save checks)
 	var event = document.createEvent("UIEvents");
-	event.initEvent("Olby_OnBeforeOpenSelectedTopics", true, false);
+	event.initEvent("phpBBx_OnBeforeOpenSelectedTopics", true, false);
 	document.dispatchEvent(event);
 
 	var checks = document.execXPath('//input[@open_all_check]');
@@ -182,15 +182,15 @@ function olby_open_selected_topics(rec)
 	);
 	
 	// close window
-	if(window.olby_close_window_after_open_selected_topics != null)
+	if(window.phpBBx_close_window_after_open_selected_topics != null)
 	{
 		var event = document.createEvent("UIEvents");
-		event.initEvent("Olby_CloseWindow", true, false);
+		event.initEvent("phpBBx_CloseWindow", true, false);
 		document.dispatchEvent(event);
 	}
 }
 
-function olby_on_open_all_pages(e, plugin)
+function phpBBx_on_open_all_pages(e, plugin)
 {
 	var doc = e.target.wrappedJSObject;
 	var checks = doc.execXPath('//input[@open_all_check]');
@@ -224,7 +224,7 @@ function olby_on_open_all_pages(e, plugin)
 	plugin.pref_branch.setCharPref('unselect-prev-' + page_id, save.join());
 }
 
-function olby_append_viewtopic_page(page, div, host, before)
+function phpBBx_append_viewtopic_page(page, div, host, before)
 {
 	// page divider
 	var pageX = document.createElement('H2');
@@ -234,7 +234,7 @@ function olby_append_viewtopic_page(page, div, host, before)
 	pageX.id = "loaded_page_" + page;
 	host.insertBefore(pageX, before);
 	
-	if(document.olby_site == 'olby')
+	if(document.phpBBx_site == 'olby')
 	{
 		var firstPosts = document.execXPath("//table[@class='forumline']//tr[td[@class='bodyline']]", div);
 		firstPosts.forEach(
@@ -261,7 +261,7 @@ function olby_append_viewtopic_page(page, div, host, before)
 	}	
 }
 
-function olby_append_memberlist_page(page, div, host, before)
+function phpBBx_append_memberlist_page(page, div, host, before)
 {
 	var trs = document.execXPath("id('memberlist')/tbody/tr", div);
 	if(trs.length != 0)
@@ -277,7 +277,7 @@ function olby_append_memberlist_page(page, div, host, before)
 	);
 }
 
-function olby_append_all_next(pageToLoad, host, before)
+function phpBBx_append_all_next(pageToLoad, host, before)
 {
 	var pager = document.oz_data.pager;
 	if(pager == null)
@@ -303,19 +303,19 @@ function olby_append_all_next(pageToLoad, host, before)
 		{
 			// notify about all pages added
 			var event = document.createEvent("UIEvents");
-			event.initEvent("Olby_PageExpanded", true, false);
+			event.initEvent("phpBBx_PageExpanded", true, false);
 			document.dispatchEvent(event);
 		}
 
-		if(window.olby_append_pages_dialog != null)
-			window.olby_append_pages_dialog.showDialog(false);
+		if(window.phpBBx_append_pages_dialog != null)
+			window.phpBBx_append_pages_dialog.showDialog(false);
 
 		return;
 	}
 	
 	if(host == null)
 	{
-		if(document.olby_site == 'olby')
+		if(document.phpBBx_site == 'olby')
 		{
 			var t = document.execXPathOne("//table[@class='forumline'][1]");
 			host = t.parentNode;
@@ -337,10 +337,10 @@ function olby_append_all_next(pageToLoad, host, before)
 		}
 	}
 	
-	if(window.olby_append_pages_dialog != null)
+	if(window.phpBBx_append_pages_dialog != null)
 	{
-		window.olby_append_pages_dialog.showDialog(true);
-		window.olby_append_pages_dialog.setProgressPage(pageToLoad, pager.max_page);
+		window.phpBBx_append_pages_dialog.showDialog(true);
+		window.phpBBx_append_pages_dialog.setProgressPage(pageToLoad, pager.max_page);
 	}
 		
 	var from_post = (pageToLoad - 1) * pager.page_size;
@@ -361,25 +361,25 @@ function olby_append_all_next(pageToLoad, host, before)
 				div.innerHTML = html;
 
 				if(document.oz_data.viewtopic != null)
-					olby_append_viewtopic_page(pageToLoad, div, host, before);
+					phpBBx_append_viewtopic_page(pageToLoad, div, host, before);
 				else if(document.oz_data.memberlist != null)
-					olby_append_memberlist_page(pageToLoad, div, host, before);
+					phpBBx_append_memberlist_page(pageToLoad, div, host, before);
 				
 				// modify links to appended pages
 				var as = document.execXPath("//a[contains(@href, 'start=" + from_post + "')]");
 				as.forEach(
 					function(a)
 					{
-						if(document.olby_site == 'olby')
+						if(document.phpBBx_site == 'olby')
 						{
 							a.className = 'active';
 						}
-						if(window.olby_replace_appended_links != null)
+						if(window.phpBBx_replace_appended_links != null)
 							a.href = "#loaded_page_" + pageToLoad;
 					}
 				);
 
-				olby_append_all_next(pageToLoad + 1, host, before, false);
+				phpBBx_append_all_next(pageToLoad + 1, host, before, false);
 			}
 			else if(httpRequest.readyState == 4 && httpRequest.status != 200)
 			{
@@ -389,8 +389,8 @@ function olby_append_all_next(pageToLoad, host, before)
 		catch(e)
 		{
 			// on error - close progress dialog and exit
-			if(window.olby_append_pages_dialog != null)
-				window.olby_append_pages_dialog.showDialog(false);
+			if(window.phpBBx_append_pages_dialog != null)
+				window.phpBBx_append_pages_dialog.showDialog(false);
 		}
 	}
 	httpRequest.send(null);
@@ -410,7 +410,7 @@ function add_AllNext_buttons(doc)
 		var linkPanel = linkPanels[i];
 
 		var nextPageButton = null;
-		if(doc.olby_site == "olby")
+		if(doc.phpBBx_site == "olby")
 			nextPageButton = doc.execXPathOne("a[last()]", linkPanel);
 		
 		// add 'open all next' button
@@ -418,7 +418,7 @@ function add_AllNext_buttons(doc)
 		{
 			var a = doc.createElement("a");
 			a.textContent = OLBY.getString("oap.all_next");
-			a.href = "javascript:olby_open_all_next()";
+			a.href = "javascript:phpBBx_open_all_next()";
 			linkPanel.insertBefore(a, nextPageButton);
 		}
 
@@ -428,7 +428,7 @@ function add_AllNext_buttons(doc)
 			var a = doc.createElement("a");
 			a.setAttribute('append_all_next_a', '');
 			a.textContent = OLBY.getString("append_all_next");
-			a.href = "javascript:olby_append_all_next()";
+			a.href = "javascript:phpBBx_append_all_next()";
 			linkPanel.insertBefore(a, nextPageButton);
 		}
 	}
@@ -438,11 +438,11 @@ function handleWindowName(doc)
 {
 	if(/sazarkevich-open-all-pages-from-this/.test(doc.defaultView.name))
 	{
-		olby_install_script(doc, "olby_open_all_next();");
+		phpBBx_install_script(doc, "phpBBx_open_all_next();");
 	}
 	if(/sazarkevich-append-all-pages-from-this/.test(doc.defaultView.name))
 	{
-		olby_install_script(doc, "olby_append_all_next();");
+		phpBBx_install_script(doc, "phpBBx_append_all_next();");
 	}
 	doc.defaultView.name = "";
 }
@@ -457,7 +457,7 @@ function modifyTopicsList(doc)
 		return;
 
 	var title = null;
-	if(doc.olby_site == "zeby")
+	if(doc.phpBBx_site == "zeby")
 		title = doc.execXPathOne("id('page-body')/h2");
 	else
 		title = doc.execXPathOne("//div[@class='snhead']//h1[@class='snh_h1']");
@@ -480,9 +480,9 @@ function modifyTopicsList(doc)
 
 		var btn = doc.createElement('input');
 		span.appendChild(btn);
-		btn.id = 'olby_open_all_sel_btn';
+		btn.id = 'phpBBx_open_all_sel_btn';
 		btn.setAttribute('type', 'button');
-		btn.setAttribute('onclick', 'javascript:olby_updated_topic_sel_unsel(this)');
+		btn.setAttribute('onclick', 'javascript:phpBBx_updated_topic_sel_unsel(this)');
 		btn.setAttribute('select-all', OLBY.getString('select-all'));
 		btn.setAttribute('select-prev', OLBY.getString('select-prev'));
 		btn.setAttribute('unselect-all', OLBY.getString('unselect-all'));
@@ -493,15 +493,15 @@ function modifyTopicsList(doc)
 	//span for hold 'open all' links
 	var span = doc.createElement("span");
 	h2.appendChild(span);
-	span.id = 'olby_open_all_updated_span';
+	span.id = 'phpBBx_open_all_updated_span';
 
 	// create link to 'updated topics'
 	if(this.features.enable_OpenAllNewTopics)
 	{
 		var aUpdatedTopics = doc.createElement('input');
-		aUpdatedTopics.id = 'olby_open_all_updated_topics';
+		aUpdatedTopics.id = 'phpBBx_open_all_updated_topics';
 		aUpdatedTopics.setAttribute('type', 'button');
-		aUpdatedTopics.setAttribute('onclick', 'olby_open_selected_topics(false)');
+		aUpdatedTopics.setAttribute('onclick', 'phpBBx_open_selected_topics(false)');
 		aUpdatedTopics.setAttribute('textTemplate', OLBY.getString('all_updated_topics'));
 		aUpdatedTopics.setAttribute('value', '[' + OLBY.getString('all_updated_topics') + ' (' + unread_links.length + ')]');
 		span.appendChild(doc.createTextNode(" "));
@@ -512,9 +512,9 @@ function modifyTopicsList(doc)
 	if(this.features.enable_OpenAllNewPages)
 	{
 		var aUpdatedPages = doc.createElement('input');
-		aUpdatedPages.id = 'olby_open_all_updated_pages';
+		aUpdatedPages.id = 'phpBBx_open_all_updated_pages';
 		aUpdatedPages.setAttribute('type', 'button');
-		aUpdatedPages.setAttribute('onclick', 'javascript:olby_open_selected_topics(true)');
+		aUpdatedPages.setAttribute('onclick', 'javascript:phpBBx_open_selected_topics(true)');
 		aUpdatedPages.setAttribute('textTemplate', OLBY.getString('all_update_pages'));
 		aUpdatedPages.setAttribute('value', '[' + OLBY.getString("all_update_pages")  + ' (' + unread_links.length + ')]');
 		span.appendChild(doc.createTextNode(" "));
@@ -560,7 +560,7 @@ function modifyUnreadLinks(doc)
 		openAllPagesCheck.setAttribute('topic_id', topicId);
 		openAllPagesCheck.setAttribute('open_all_check', '');
 		openAllPagesCheck.setAttribute('type', 'checkbox');
-		openAllPagesCheck.setAttribute('onchange', 'olby_updated_topic_check_changed(true)');
+		openAllPagesCheck.setAttribute('onchange', 'phpBBx_updated_topic_check_changed(true)');
 		openAllPagesCheck.defaultChecked = (save.indexOf(topicId) == -1 || this.features.saveLastSelection == false);
 		openAllPagesCheck.was = openAllPagesCheck.defaultChecked;
 		newRef.parentNode.insertBefore(openAllPagesCheck, newRef.nextSibling);
@@ -572,38 +572,38 @@ function modifyUnreadLinks(doc)
 
 function modifyPage(doc)
 {
-	olby_install_script(doc, olby_updated_topic_check_changed);
-	olby_install_script(doc, olby_open_selected_topics);
-	olby_install_script(doc, olby_updated_topic_sel_unsel);
-	olby_install_script(doc, olby_append_all_next);
-	olby_install_script(doc, olby_open_all_next);
-	olby_install_script(doc, olby_create_append_pages_dialog);
-	olby_install_script(doc, olby_append_viewtopic_page);
-	olby_install_script(doc, olby_append_memberlist_page);
+	phpBBx_install_script(doc, phpBBx_updated_topic_check_changed);
+	phpBBx_install_script(doc, phpBBx_open_selected_topics);
+	phpBBx_install_script(doc, phpBBx_updated_topic_sel_unsel);
+	phpBBx_install_script(doc, phpBBx_append_all_next);
+	phpBBx_install_script(doc, phpBBx_open_all_next);
+	phpBBx_install_script(doc, phpBBx_create_append_pages_dialog);
+	phpBBx_install_script(doc, phpBBx_append_viewtopic_page);
+	phpBBx_install_script(doc, phpBBx_append_memberlist_page);
 	
 	this.modifyTopicsList(doc);
 	this.modifyUnreadLinks(doc);
 	this.add_AllNext_buttons(doc);
 	
 	var plugin = this;
-	doc.addEventListener("Olby_OnBeforeOpenSelectedTopics", function(e) { olby_on_open_all_pages(e, plugin) }, false);
+	doc.addEventListener("phpBBx_OnBeforeOpenSelectedTopics", function(e) { phpBBx_on_open_all_pages(e, plugin) }, false);
 	
-	doc.addEventListener("Olby_CloseWindow", function() { this.defaultView.close() }, false);
+	doc.addEventListener("phpBBx_CloseWindow", function() { this.defaultView.close() }, false);
 
 	if(this.features.enableReplaceAppendedLinks)
-		olby_install_script(doc, "window.olby_replace_appended_links = 0");
+		phpBBx_install_script(doc, "window.phpBBx_replace_appended_links = 0");
 		
 	if(this.features.enableCloseWindowAfterOpenSelTopics)
-		olby_install_script(doc, "olby_close_window_after_open_selected_topics = 0");
+		phpBBx_install_script(doc, "phpBBx_close_window_after_open_selected_topics = 0");
 }
 
 function runPage(doc)
 {
-	olby_install_script(doc, 'olby_create_append_pages_dialog()');
+	phpBBx_install_script(doc, 'phpBBx_create_append_pages_dialog()');
 
 	this.handleWindowName(doc);
 
-	olby_install_script(doc, 'olby_updated_topic_check_changed(false)');
+	phpBBx_install_script(doc, 'phpBBx_updated_topic_check_changed(false)');
 }
 
 this.features.addFeature("enable_OpenAllNewTopics",  OLBY.getString("oap.enable_OpenAllNewTopics"));

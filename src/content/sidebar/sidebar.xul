@@ -6,7 +6,7 @@
 
 	<!-- Commands -->
 	<commandset id="mainCommandSet">
-		<command id="olby_toggleSidebar" oncommand="window.OLBY.Sidebar.toggleSidebar();"/>
+		<command id="phpBBx_toggleSidebar" oncommand="window.OLBY.Sidebar.toggleSidebar();"/>
 	</commandset>
 
 	<!-- Sidebar -->
@@ -18,7 +18,7 @@
 					<label id="olby-title" control="olby-browser" crop="end"
 						value="Find Tool" />
 					<spacer flex="1"/>
-					<toolbarbutton class="tabs-closebutton" command="olby_toggleSidebar"/>
+					<toolbarbutton class="tabs-closebutton" command="phpBBx_toggleSidebar"/>
 				</toolbar>
 			</toolbox>
 
