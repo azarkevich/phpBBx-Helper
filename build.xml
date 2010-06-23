@@ -47,6 +47,8 @@
 			</fileset>
 		</replaceregexp>
 
+		<zip destfile="${path.build}/phpBBx.xpi" basedir="${path.build.src}" includes="**/*" />
+
 	</target>
 
 	<target name="clean">
