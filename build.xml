@@ -1,0 +1,33 @@
+<project name="MinskTransSched" default="build" basedir=".">
+
+	<property file="build.properties" />
+	<property file="auth.properties" />
+
+	<path id="project.classpath">
+		<pathelement location="svnjavahl.jar" /> 
+		<pathelement location="svnant.jar" />
+		<pathelement location="svnClientAdapter.jar" />
+	</path>
+  
+	<taskdef name="svn" classpathref="project.classpath"
+		    classname="org.tigris.subversion.svnant.SvnTask" />
+
+	<target name="getversion">
+
+		<property name="version.svn-revision" value="-unk-" />
+
+	</target>
+
+	<target name="build">
+		<delete dir="${path.build}" />
+		
+		<svn>
+			<export srcPath="src" destPath="${path.build}" />
+		</svn>
+	</target>
+
+	<target name="clean">
+
+	</target>
+
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
+
+	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/sidebar/sidebar.js' />
+
+	<!-- Commands -->
+	<commandset id="mainCommandSet">
+		<command id="olby_toggleSidebar" oncommand="window.OLBY.Sidebar.toggleSidebar();"/>
+	</commandset>
+
+	<!-- Sidebar -->
+	<vbox id="appcontent">
+		<splitter id="olby-sidebar-splitter" hidden="true"/>
+		<vbox id="olby-sidebar" hidden="true">
+			<toolbox id="olby-header">
+				<toolbar align="center" grippyhidden="true" fullscreentoolbar="true" flex="1">
+					<label id="olby-title" control="olby-browser" crop="end"
+						value="Find Tool" />
+					<spacer flex="1"/>
+					<toolbarbutton class="tabs-closebutton" command="olby_toggleSidebar"/>
+				</toolbar>
+			</toolbox>
+
+		</vbox>
+	</vbox>
+</overlay>

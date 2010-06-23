@@ -1,0 +1,14 @@
+#prefwindow-options radio[pane] {
+  list-style-image: url("chrome://browser/skin/preferences/Options.png"); 
+  padding: 5px 3px 1px;
+}
+
+radio[pane=prefpane-general]
+{
+	-moz-image-region: rect(0px, 32px,  32px, 0px)
+}
+
+radio
+{
+	-moz-image-region: rect(0px, 224px, 32px, 192px)
+}

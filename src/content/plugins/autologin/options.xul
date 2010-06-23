@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'
+	id="autologin-options-overlay">
+
+	<prefpane id="autologin">
+		<preferences>
+			<preference id="pref-autologin-enable" name="extensions.onliner-by-helper.autologin.enabled" type="bool"/>
+			<preference id="pref-autologin-username" name="extensions.onliner-by-helper.autologin.username" type="string"/>
+			<preference id="pref-autologin-password" name="extensions.onliner-by-helper.autologin.password" type="string"/>
+		</preferences>
+		
+		<groupbox>
+			<caption label="Автовход" />
+			<checkbox label="Разрешить" preference="pref-autologin-enable"/>
+			<textbox flex="1" preference="pref-autologin-username"/>
+			<textbox type="password" flex="1" preference="pref-autologin-password"/>
+		</groupbox>
+		
+	</prefpane>
+</overlay>

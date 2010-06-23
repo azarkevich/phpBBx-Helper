@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'
+	id="ignore-users-options-overlay">
+
+	<prefpane id="ignore-users">
+		<preferences>
+			<preference id="pref-ignore-users-enable" name="extensions.onliner-by-helper.ignore-users.enabled" type="bool"/>
+			<preference id="pref-ignore-users-users" name="extensions.onliner-by-helper.ignore-users.users" type="string"/>
+		</preferences>
+		
+		<groupbox>
+			<caption label="Игнорировать" />
+			<checkbox label="Разрешить" preference="pref-ignore-users-enable"/>
+			<textbox flex="1" preference="pref-ignore-users-users"/>
+		</groupbox>
+		
+	</prefpane>
+</overlay>

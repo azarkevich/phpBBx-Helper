@@ -1,0 +1,66 @@
+﻿<?xml version="1.0"?>
+<overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
+	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/plugins-manager.js'/>
+	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/script-launcher.js'/>
+	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/utils.js' />
+
+	<!--Status bar popup menu-->
+	<statusbar id="status-bar">
+		<statusbarpanel id="onliner-by-helper-statusbar-panel"
+			class="statusbarpanel-menu-iconic"
+			tooltiptext="Onliner.By + Zelenybor.By helper (версия 3.17.r239)"
+			src="chrome://onliner-by-helper/skin/icon.png"
+			onclick="olby_OnStatusPanelBtnClik(event);"
+			onload="olby_eanbleChanged();" />
+
+		<menupopup id="onliner-by-helper-statusbar-menu" onpopupshowing="olby_OnShowStatusbarPopupMenu(event)"> 
+			<menuitem id="onliner-by-helper-enable" label="Включить" tooltip="Включает и отключает расширение" 
+						type="checkbox" oncommand="olby_enableAddin(!olby_isAddinEnabled());"/>
+			<menuseparator />
+			<!--menuitem id="onliner-by-helper-popup-find-tool" label="Panel" command="olby_toggleSidebar"/-->
+			<menuitem id="onliner-by-helper-popup-options" label="Options" command="olby_showOptions"/>
+		</menupopup>
+	</statusbar>
+
+	<script>
+		function olby_OnStatusPanelBtnClik(ev)
+		{
+			if(ev.button == 0)
+			{
+				olby_enableAddin(!olby_isAddinEnabled());
+			}
+			else if(ev.button == 2)
+			{
+				try{
+					var panel = document.getElementById('onliner-by-helper-statusbar-panel');
+					var popup = document.getElementById('onliner-by-helper-statusbar-menu');
+					popup.showPopup(panel, -1, -1, "popup", "bottomleft", "topleft");
+				}catch(e) {alert(e);};
+			}
+		}
+		
+		function olby_eanbleChanged()
+		{
+			var img = "chrome://onliner-by-helper/skin/" + (olby_isAddinEnabled() ? "icon.png" : "icon-gray.png");
+			document.getElementById('onliner-by-helper-statusbar-panel').setAttribute('src', img);
+			document.getElementById('onliner-by-helper-enable').setAttribute('checked', olby_isAddinEnabled());
+		}
+
+		function olby_OnShowStatusbarPopupMenu(ev)
+		{
+			document.getElementById('onliner-by-helper-enable').setAttribute('checked', olby_isAddinEnabled());
+		}
+
+		var observer={
+			observe: function(subject, topic, prefName) {
+					olby_eanbleChanged();
+			}
+		};
+		olby_prefBranch.addObserver("enabled", observer, false);
+	</script>
+
+	<!-- Commands -->
+	<commandset id="mainCommandSet">
+		<command id="olby_showOptions" oncommand="window.openDialog('chrome://onliner-by-helper/content/options/options.xul', 'onliner-by-helper-options', 'chrome,modal,toolbar,resizable=yes');"/>
+	</commandset>
+</overlay>
