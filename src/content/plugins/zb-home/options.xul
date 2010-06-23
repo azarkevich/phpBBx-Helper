@@ -7,7 +7,7 @@
 	<prefpane id="zb-home" onpaneload ="olby_zbhome_init()">
 
 		<preferences>
-			<preference id="pref-zb_home-enable" name="extensions.onliner-by-helper.zb-home.enabled" type="bool"/>
+			<preference id="pref-zb_home-enable" name="extensions.phpBBx-helper.zb-home.enabled" type="bool"/>
 		</preferences>
 		
 		<groupbox>

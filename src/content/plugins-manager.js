@@ -2,9 +2,9 @@ function olby_getContentDir()
 {
 	var il = Components.classes["@mozilla.org/extensions/manager;1"]
 			   .getService(Components.interfaces.nsIExtensionManager)
-			   .getInstallLocation("onliner-by-helper@sergey.azarkevich");
+			   .getInstallLocation("phpBBx-helper@sergey.azarkevich");
 	var dir = il.location;
-	dir.append("onliner-by-helper@sergey.azarkevich");
+	dir.append("phpBBx-helper@sergey.azarkevich");
 	if(dir.isFile())
 	{
 		// open an input stream from file
@@ -68,7 +68,7 @@ function olby_loadPlugins()
 
 		plugin.name = file.leafName.replace(/\.js$/, '');
 
-		var base_uri = 'chrome://onliner-by-helper/content/plugins/';
+		var base_uri = 'chrome://phpBBx-helper/content/plugins/';
 		
 		if(file.isDirectory())
 		{
@@ -79,7 +79,7 @@ function olby_loadPlugins()
 		if(file.isFile() == false)
 			continue;
 
-		plugin.pref_branch_name = "extensions.onliner-by-helper." + plugin.name + ".";
+		plugin.pref_branch_name = "extensions.phpBBx-helper." + plugin.name + ".";
 		plugin.pref_branch = Components.classes["@mozilla.org/preferences-service;1"]
 			.getService(Components.interfaces.nsIPrefService)
 			.getBranch(plugin.pref_branch_name);

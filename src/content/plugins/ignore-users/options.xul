@@ -6,8 +6,8 @@
 
 	<prefpane id="ignore-users">
 		<preferences>
-			<preference id="pref-ignore-users-enable" name="extensions.onliner-by-helper.ignore-users.enabled" type="bool"/>
-			<preference id="pref-ignore-users-users" name="extensions.onliner-by-helper.ignore-users.users" type="string"/>
+			<preference id="pref-ignore-users-enable" name="extensions.phpBBx-helper.ignore-users.enabled" type="bool"/>
+			<preference id="pref-ignore-users-users" name="extensions.phpBBx-helper.ignore-users.users" type="string"/>
 		</preferences>
 		
 		<groupbox>

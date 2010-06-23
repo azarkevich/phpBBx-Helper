@@ -1,9 +1,9 @@
 content	onliner-by-helper	content/
-content	onliner-by-helper	content/	contentaccessible=yes
+content	phpBBx-helper	content/	contentaccessible=yes
 
-overlay	chrome://browser/content/browser.xul	chrome://onliner-by-helper/content/firefoxOverlay.xul
-overlay	chrome://browser/content/browser.xul	chrome://onliner-by-helper/content/sidebar/sidebar.xul
+overlay	chrome://browser/content/browser.xul	chrome://phpBBx-helper/content/firefoxOverlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://phpBBx-helper/content/sidebar/sidebar.xul
 
-skin	onliner-by-helper classic/1.0 skin/
+skin	phpBBx-helper classic/1.0 skin/
 
-locale	onliner-by-helper	ru-RU		locale/ru-RU/
+locale	phpBBx-helper	ru-RU		locale/ru-RU/

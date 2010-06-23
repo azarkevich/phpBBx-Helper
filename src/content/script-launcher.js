@@ -6,7 +6,7 @@ OLBY.getString = function(name)
 	{
 		this.pluginsStringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
 			.getService(Components.interfaces.nsIStringBundleService)
-			.createBundle("chrome://onliner-by-helper/locale/plugins.properties");
+			.createBundle("chrome://phpBBx-helper/locale/plugins.properties");
 	}
 	return this.pluginsStringBundle.GetStringFromName(name);
 }
@@ -16,9 +16,9 @@ function olby_loadDependencies()
 	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
 		   .getService(Components.interfaces.mozIJSSubScriptLoader);
 
-	loader.loadSubScript('chrome://onliner-by-helper/content/utils.js');
-	loader.loadSubScript('chrome://onliner-by-helper/content/page_parser.js');
-	loader.loadSubScript('chrome://onliner-by-helper/content/plugins-manager.js');
+	loader.loadSubScript('chrome://phpBBx-helper/content/utils.js');
+	loader.loadSubScript('chrome://phpBBx-helper/content/page_parser.js');
+	loader.loadSubScript('chrome://phpBBx-helper/content/plugins-manager.js');
 
 	OLBY.Plugins = olby_loadPlugins();
 }
@@ -149,7 +149,7 @@ window.addEventListener('unload', olby_OnUnload, false);
 
 olby_prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefService)
-		.getBranch("extensions.onliner-by-helper.");
+		.getBranch("extensions.phpBBx-helper.");
 olby_prefBranch.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
 
 olby_reloadEachTime = false;

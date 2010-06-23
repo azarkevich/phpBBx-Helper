@@ -3,6 +3,8 @@
 	<property file="build.properties" />
 	<property file="auth.properties" />
 
+	<property name="path.build.src" value="${path.build}/src/" />
+
 	<path id="project.classpath">
 		<pathelement location="svnjavahl.jar" /> 
 		<pathelement location="svnant.jar" />
@@ -14,19 +16,42 @@
 
 	<target name="getversion">
 
-		<property name="version.svn-revision" value="-unk-" />
+		<svn>
+			<wcVersion path="${basedir}" />
+		</svn>
+
+		<property name="version.svn-revision" value="${revision.max}" />
+
+		<property name="version" value="${version.major}.${version.minor}.r${version.svn-revision}" />
 
 	</target>
 
-	<target name="build">
+	<target name="build" depends="getversion">
 		<delete dir="${path.build}" />
+
+		<echo message="Build ${version}" />
 		
 		<svn>
-			<export srcPath="src" destPath="${path.build}" />
+			<export srcPath="src" destPath="${path.build.src}" />
 		</svn>
+
+		<replaceregexp match="%EXT.VERSION%" replace="${version}" byline="true">
+			<fileset dir="${path.build.src}">
+				<include name="**/*"/>
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="%EXT.NAME%" replace="phpBBx Helper" byline="true">
+			<fileset dir="${path.build.src}">
+				<include name="**/*"/>
+			</fileset>
+		</replaceregexp>
+
 	</target>
 
 	<target name="clean">
+
+		<delete dir="${path.build}" />
 
 	</target>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://onliner-by-helper/content/options/options.css" type="text/css"?>
+<?xml-stylesheet href="chrome://phpBBx-helper/content/options/options.css" type="text/css"?>
 
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="prefwindow-options"
@@ -13,7 +13,7 @@
 			 id="prefpane-general"
 			 label="Общие">
 		<preferences>
-			<preference id="pref-ext-enable" name="extensions.onliner-by-helper.enabled" type="bool"/>
+			<preference id="pref-ext-enable" name="extensions.phpBBx-helper.enabled" type="bool"/>
 		</preferences>
 		
 		<checkbox label="Включить расширение" preference="pref-ext-enable"/>
@@ -29,6 +29,6 @@
 		</vbox>
 	</prefpane>
 
-	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/options/options.js' />
+	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/options/options.js' />
 	
 </prefwindow>

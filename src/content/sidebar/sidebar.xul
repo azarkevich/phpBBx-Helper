@@ -2,7 +2,7 @@
 
 <overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
 
-	<script type='application/x-javascript' src='chrome://onliner-by-helper/content/sidebar/sidebar.js' />
+	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/sidebar/sidebar.js' />
 
 	<!-- Commands -->
 	<commandset id="mainCommandSet">

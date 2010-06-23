@@ -10,7 +10,7 @@ OLBY.Sidebar.toggleSidebar = function()
 	
 	var pref = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefService)
-		.getBranch("extensions.onliner-by-helper.sidebar.");
+		.getBranch("extensions.phpBBx-helper.sidebar.");
 
 	if(hide)
 	{

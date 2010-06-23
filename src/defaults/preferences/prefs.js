@@ -1,4 +1,4 @@
-pref("extensions.onliner-by-helper.enabled", true);
-pref("extensions.onliner-by-helper.force", false);
-pref("extensions.onliner-by-helper.force.site", "olby");
-pref("extensions.onliner-by-helper.force.page", "viewtopic.php");
+pref("extensions.phpBBx-helper.enabled", true);
+pref("extensions.phpBBx-helper.force", false);
+pref("extensions.phpBBx-helper.force.site", "olby");
+pref("extensions.phpBBx-helper.force.page", "viewtopic.php");

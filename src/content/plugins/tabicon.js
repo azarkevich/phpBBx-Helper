@@ -29,11 +29,11 @@ function modifyPage(doc, expanded)
 	var site = doc.olby_site;
 	if(expanded == null)
 	{
-		olby_set_tab_icon(doc, 'chrome://onliner-by-helper/skin/' + site + '/icon-fwd.png');
+		olby_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-fwd.png');
 	}
 	else
 	{
-		olby_set_tab_icon(doc, 'chrome://onliner-by-helper/skin/' + site + '/icon-all.png');
+		olby_set_tab_icon(doc, 'chrome://phpBBx-helper/skin/' + site + '/icon-all.png');
 	}
 }
 

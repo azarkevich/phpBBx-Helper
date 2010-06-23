@@ -9,7 +9,7 @@ function modifyPage(doc)
 
 	var br = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefBranch)
-		.getBranch("extensions.onliner-by-helper.autologin.");
+		.getBranch("extensions.phpBBx-helper.autologin.");
 
 	autologin.usr.value = br.getComplexValue("username", Components.interfaces.nsISupportsString).data;
 	autologin.pwd.value = br.getComplexValue("password", Components.interfaces.nsISupportsString).data;

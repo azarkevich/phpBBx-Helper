@@ -14,11 +14,11 @@ function FaqManager()
 	var url = 'file:///' + escape(file.path);
 	this.DataSource = this.service.GetDataSourceBlocking(url);
 	this.DataSource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource);
-	this.faqResource = this.service.GetResource("http://azarkevich.blogspot.com/onliner-by-helper/faq");
+	this.faqResource = this.service.GetResource("http://azarkevich.blogspot.com/phpBBx-helper/faq");
 			
 	this.setFaqInfo = function(faqNum, faqText)
 	{
-		var prop = this.service.GetResource("http://azarkevich.blogspot.com/onliner-by-helper/faq#" + faqNum);
+		var prop = this.service.GetResource("http://azarkevich.blogspot.com/phpBBx-helper/faq#" + faqNum);
 
 		// find old and replace with new:
 		var oldTarget = this.DataSource.GetTarget(this.faqResource, prop, true);
@@ -30,7 +30,7 @@ function FaqManager()
 
 	this.getFaqInfo = function(faqNum, faqText)
 	{
-		var prop = this.service.GetResource("http://azarkevich.blogspot.com/onliner-by-helper/faq#" + faqNum);
+		var prop = this.service.GetResource("http://azarkevich.blogspot.com/phpBBx-helper/faq#" + faqNum);
 		var val = this.DataSource.GetTarget(this.faqResource, prop, true);
 		if(val == null)
 			return "";

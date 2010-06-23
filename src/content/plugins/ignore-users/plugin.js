@@ -32,7 +32,7 @@ function modifyPage(doc)
 	
 	var br = Components.classes["@mozilla.org/preferences-service;1"]
 		.getService(Components.interfaces.nsIPrefBranch)
-		.getBranch("extensions.onliner-by-helper.ignore-users.");
+		.getBranch("extensions.phpBBx-helper.ignore-users.");
 
 	var users = [];
 	if(br.prefHasUserValue("users"))
