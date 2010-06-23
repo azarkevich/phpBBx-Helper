@@ -35,19 +35,47 @@
 			<export srcPath="src" destPath="${path.build.src}" />
 		</svn>
 
+		<property name="xpi.name" value="phpBBx-${version}.xpi" />
+
+		<copy file="update/update-manifest.xml" tofile="${path.build}/phpBBx-update-manifest.xml" />
+
 		<replaceregexp match="%EXT.VERSION%" replace="${version}" byline="true">
-			<fileset dir="${path.build.src}">
+			<fileset dir="${path.build}">
 				<include name="**/*"/>
 			</fileset>
 		</replaceregexp>
 
 		<replaceregexp match="%EXT.NAME%" replace="phpBBx Helper" byline="true">
-			<fileset dir="${path.build.src}">
+			<fileset dir="${path.build}">
 				<include name="**/*"/>
 			</fileset>
 		</replaceregexp>
 
-		<zip destfile="${path.build}/phpBBx.xpi" basedir="${path.build.src}" includes="**/*" level="9" />
+		<replaceregexp match="%UPDATE.URL.BASE%" replace="${update.url.base}" byline="true">
+			<fileset dir="${path.build}">
+				<include name="**/*"/>
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="%UPDATE.URL%" replace="${update.url.base}phpBBx-update-manifest.xml" byline="true">
+			<fileset dir="${path.build}">
+				<include name="**/*"/>
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="%XPI.NAME%" replace="${xpi.name}" byline="true">
+			<fileset dir="${path.build}">
+				<include name="**/*"/>
+			</fileset>
+		</replaceregexp>
+
+		<zip destfile="${path.build}/${xpi.name}" basedir="${path.build.src}" includes="**/*" level="9" />
+
+		<checksum file="${path.build}/${xpi.name}" algorithm="SHA-256" property="xpi.sha256"/>
+
+		<property name="xpi.hash" value="sha256:${xpi.sha256}" />
+		
+		<replaceregexp file="${path.build}/phpBBx-update-manifest.xml" match="%XPI.HASH%" replace="${xpi.hash}" byline="true" />
 
 	</target>
 
