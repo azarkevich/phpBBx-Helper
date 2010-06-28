@@ -1,5 +1,6 @@
 <project name="MinskTransSched" default="build" basedir=".">
 
+	<property file="local.properties" />
 	<property file="build.properties" />
 	<property file="auth.properties" />
 
@@ -26,7 +27,7 @@
 
 	</target>
 
-	<target name="build" depends="getversion">
+	<target name="build" depends="clean,getversion">
 		<delete dir="${path.build}" />
 
 		<echo message="Build ${version}" />
@@ -37,7 +38,7 @@
 
 		<property name="xpi.name" value="phpBBx-${version}.xpi" />
 
-		<copy file="update/update-manifest.xml" tofile="${path.build}/phpBBx-update-manifest.xml" />
+		<copy file="update/update.rdf" tofile="${path.build}/phpBBx-update.rdf" />
 
 		<replaceregexp match="%EXT.VERSION%" replace="${version}" byline="true">
 			<fileset dir="${path.build}">
@@ -57,7 +58,7 @@
 			</fileset>
 		</replaceregexp>
 
-		<replaceregexp match="%UPDATE.URL%" replace="${update.url.base}phpBBx-update-manifest.xml" byline="true">
+		<replaceregexp match="%UPDATE.URL%" replace="${update.url.base}phpBBx-update.rdf" byline="true">
 			<fileset dir="${path.build}">
 				<include name="**/*"/>
 			</fileset>
@@ -76,8 +77,25 @@
 
 		<property name="xpi.hash" value="sha256:${xpi.sha256}" />
 		
-		<replaceregexp file="${path.build}/phpBBx-update-manifest.xml" match="%XPI.HASH%" replace="${xpi.hash}" byline="true" />
+		<replaceregexp file="${path.build}/phpBBx-update.rdf" match="%XPI.HASH%" replace="${xpi.hash}" byline="true" />
 
+		<copy file="${path.build}/${xpi.name}" tofile="${path.build}/phpBBx-latest.xpi" />
+
+		<!-- run maccoy for sign addon-->
+		<exec executable="${McCoy.path}" dir="${path.build}" />
+
+	</target>
+
+	<target name="deploy" depends="build" >
+
+		<ftp	server="ftp.tut.by"
+			remotedir="MozAddIns"
+			userid="${ftp.tutby.user}"
+			password="${ftp.tutby.pass}">
+
+			<fileset dir="${path.build}"/>
+
+		</ftp>
 	</target>
 
 	<target name="clean">
