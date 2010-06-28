@@ -13,7 +13,7 @@
 			em:optionsURL="chrome://phpBBx-helper/content/options/options.xul"
 			em:iconURL="chrome://phpBBx-helper/skin/icon.png"
 			em:updateURL="%UPDATE.URL%"
-			em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6l1nfxENCktEqW1M2zv0rS6IPKa7OdA1o5Oq1dNP1AxfVZS097fwWXwxjL9J0SY4FFGAC27z6/M2LlYospT+vZFwJhMtjaL1djgFmubS0PcRu++2k3WcML864MziL92fw7AkTm3jJoCiBsoz3e8mPc4FBlxo/+CXai2sLp5YTmwIDAQAB">
+			em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEPYvb1gYjBr+z/6yJPhy++CoB7R4BBriWEl8TCkqd8QNs4ajSqn97up9JtQTL2xZNRt8F4sT588BYEkuVrrQQ4h0hIdbXAL6eY0WQg2YDymTZotue/MbDZsnWaUYzX5lQbCjiA4RKFevUqo4nwIEMysu6BlVvGyHSIdF4Hzc27QIDAQAB">
 	    <em:targetApplication>
 			<RDF:Description
 				em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
