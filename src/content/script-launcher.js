@@ -126,10 +126,10 @@ function phpBBx_enableAddin(enable)
 
 function phpBBx_OnLoad()
 {
-	var	appcontent = window.document.getElementById("appcontent");
-	if (appcontent && appcontent.onliner_by_helper_done == null)
+	var appcontent = window.document.getElementById("appcontent");
+	if (appcontent && appcontent.phpBBx_helper_done == null)
 	{
-		appcontent.onliner_by_helper_done = true;
+		appcontent.phpBBx_helper_done = true;
 		appcontent.addEventListener("DOMContentLoaded", phpBBx_OnContentLoad, false);
 	}
 }
