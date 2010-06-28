@@ -58,7 +58,7 @@
 			</fileset>
 		</replaceregexp>
 
-		<replaceregexp match="%UPDATE.URL%" replace="${update.url.base}phpBBx-update.rdf" byline="true">
+		<replaceregexp match="%UPDATE.URL%" replace="${update.url.base}phpBBx-update.xml" byline="true">
 			<fileset dir="${path.build}">
 				<include name="**/*"/>
 			</fileset>
@@ -83,6 +83,8 @@
 
 		<!-- run maccoy for sign addon-->
 		<exec executable="${McCoy.path}" dir="${path.build}" />
+
+		<move file="${path.build}/phpBBx-update.rdf" tofile="${path.build}/phpBBx-update.xml" />
 
 	</target>
 
