@@ -61,7 +61,7 @@ function phpBBx_OnContentLoad(e)
 			phpBBx_loadDependencies();
 		}
 		
-		onliner_by_utils_install(doc);
+		phpBBx_utils_install(doc);
 		
 		doc.oz_data = new phpBBx_PageParser(doc, force.page);
 		

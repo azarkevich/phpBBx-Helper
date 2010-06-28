@@ -70,6 +70,7 @@
 		</replaceregexp>
 
 		<zip destfile="${path.build}/${xpi.name}" basedir="${path.build.src}" includes="**/*" level="9" />
+		<delete dir="${path.build.src}" />
 
 		<checksum file="${path.build}/${xpi.name}" algorithm="SHA-256" property="xpi.sha256"/>
 
