@@ -82,13 +82,10 @@
 		<copy file="${path.build}/${xpi.name}" tofile="${path.build}/phpBBx-latest.xpi" />
 
 		<!-- run maccoy for sign addon-->
-		<echo message="Run in ${path.build}" />
 		<exec executable="${McCoy.path}" dir="${path.build}" />
 
 		<move file="${path.build}/phpBBx-update.rdf" tofile="${path.build}/phpBBx-update.xml" />
 		
-		<echo message="Well done." />
-
 	</target>
 
 	<target name="deploy" depends="build" >
