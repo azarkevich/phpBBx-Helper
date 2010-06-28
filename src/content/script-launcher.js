@@ -137,7 +137,7 @@ function phpBBx_OnLoad()
 function phpBBx_OnUnload()
 {
 	//remove now unnecessary listeners
-	var	appcontent = window.document.getElementById("appcontent");
+	var appcontent = window.document.getElementById("appcontent");
 	appcontent.removeEventListener("DOMContentLoaded", phpBBx_OnContentLoad, false);
 
 	window.removeEventListener('load', phpBBx_OnLoad, false);
