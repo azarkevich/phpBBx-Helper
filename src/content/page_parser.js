@@ -60,7 +60,13 @@ function phpBBx_PageParser(doc, page)
 		this.printview = new Object();
 		this.printview.full_href = doc.location.href.replace(/printview\.php/, 'viewtopic.php')
 	}
-	
+
+	if(/profile\.onliner\.by/.test(doc.location.href))
+	{
+		this.profile = new Object();
+		this.profile.search_me = doc.execXPathOne("//div[@class='genmed']");
+	}
+
 	//new
 	if(doc.phpBBx_site == "olby")
 		this.unread_links = doc.execXPath("//span[@class='nav']/a[contains(@href, 'view=newest')]");
