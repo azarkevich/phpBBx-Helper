@@ -11,6 +11,7 @@ function phpBBx_create_append_pages_dialog()
 	dialog.style.padding = '5px';
 	dialog.style.margin = '5px';
 	dialog.style.display = 'none';
+	dialog.style.zIndex = '10';
 
 	var text = document.createElement('span');
 	text.style.fontSize = '18pt';
@@ -24,6 +25,19 @@ function phpBBx_create_append_pages_dialog()
 	progressDiv.style.textAlign = 'center';
 	progressDiv.style.width = "100%";
 	progressDiv.textContent = "0";
+
+	var close = document.createElement('input');
+	close.setAttribute('type', 'button');
+	close.setAttribute('value', 'X');
+	close.onclick = function()
+	{
+		dialog.showDialog(false);
+	};
+
+	dialog.appendChild(document.createElement('br'));
+	dialog.appendChild(close);
+
+
 	dialog.setProgressPage = function(page, total)
 	{
 		progressDiv.textContent = "Loading " + page + " / " + total;
@@ -50,25 +64,6 @@ function phpBBx_create_append_pages_dialog()
 
     document.body.appendChild(dialog);
 	window.phpBBx_append_pages_dialog = dialog;
-}
-
-function phpBBx_open_all_next()
-{
-	var pager = document.oz_data.pager;
-	if(pager == null)
-		return;
-
-	var currPage = pager.cur_page;
-	var lastPage = pager.max_page;
-	var pagesCount = lastPage - currPage;
-	if(pagesCount > 10 && window.confirm('Open ' + pagesCount + ' pages?') == false)
-		return;
-
-	for(var i=currPage + 1;i<lastPage + 1;i++)
-	{
-		var href = pager.href_template.replace(/&start=\d+/, "&start=" + (i - 1) * pager.page_size);
-		window.open(href, '_blank');
-	}
 }
 
 function phpBBx_updated_topic_sel_unsel(btn)
@@ -317,7 +312,7 @@ function phpBBx_append_all_next(pageToLoad, host, before)
 	{
 		if(document.phpBBx_site == 'olby')
 		{
-			var t = document.execXPathOne("//table[@class='forumline'][1]");
+			var t = document.execXPathOne("//td[@class='container']/table[@class='forumline']");
 			host = t.parentNode;
 			before = t.nextSibling;
 		}
@@ -413,15 +408,6 @@ function add_AllNext_buttons(doc)
 		if(doc.phpBBx_site == "olby")
 			nextPageButton = doc.execXPathOne("a[last()]", linkPanel);
 		
-		// add 'open all next' button
-		if(this.features.enable_OpenAllNext)
-		{
-			var a = doc.createElement("a");
-			a.textContent = OLBY.getString("oap.all_next");
-			a.href = "javascript:phpBBx_open_all_next()";
-			linkPanel.insertBefore(a, nextPageButton);
-		}
-
 		// add 'append all next'
 		if(this.features.enableAppendAllNext && (doc.oz_data.viewtopic != null || doc.oz_data.memberlist != null))
 		{
@@ -436,10 +422,6 @@ function add_AllNext_buttons(doc)
 
 function handleWindowName(doc)
 {
-	if(/sazarkevich-open-all-pages-from-this/.test(doc.defaultView.name))
-	{
-		phpBBx_install_script(doc, "phpBBx_open_all_next();");
-	}
 	if(/sazarkevich-append-all-pages-from-this/.test(doc.defaultView.name))
 	{
 		phpBBx_install_script(doc, "phpBBx_append_all_next();");
@@ -576,7 +558,6 @@ function modifyPage(doc)
 	phpBBx_install_script(doc, phpBBx_open_selected_topics);
 	phpBBx_install_script(doc, phpBBx_updated_topic_sel_unsel);
 	phpBBx_install_script(doc, phpBBx_append_all_next);
-	phpBBx_install_script(doc, phpBBx_open_all_next);
 	phpBBx_install_script(doc, phpBBx_create_append_pages_dialog);
 	phpBBx_install_script(doc, phpBBx_append_viewtopic_page);
 	phpBBx_install_script(doc, phpBBx_append_memberlist_page);
@@ -608,7 +589,6 @@ function runPage(doc)
 
 this.features.addFeature("enable_OpenAllNewTopics",  OLBY.getString("oap.enable_OpenAllNewTopics"));
 this.features.addFeature("enable_OpenAllNewPages",  OLBY.getString("oap.enable_OpenAllNewPages"));
-this.features.addFeature("enable_OpenAllNext",  OLBY.getString("oap.enable_OpenAllNext"));
 this.features.addFeature("enable_OpenNewAll",  OLBY.getString("oap.enable_OpenNewAll"));
 this.features.addFeature("enableOpenCheck",  OLBY.getString('enableOpenCheck'));
 this.features.addFeature("enableSelectButton",  OLBY.getString('enableSelectButton'));

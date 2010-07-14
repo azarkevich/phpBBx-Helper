@@ -32,7 +32,7 @@ function phpBBx_utils_install(doc)
 		if(d.wrappedJSObject != null)
 			d = d.wrappedJSObject;
 		var res = d.execXPath(xpath, ctx, nsResolver);
-		if(res.length != 1)
+		if(res.length == 0)
 			return null;
 		return res[0];
 	}
