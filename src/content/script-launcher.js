@@ -45,7 +45,7 @@ function phpBBx_OnContentLoad(e)
 			var onliner = false;
 			var zelenybor = false;
 			onliner = /(forum|baraholka|profile)\.onliner\.by/.test(href);	// %%CHECK.ONLINER%%
-			zelenybor = /forum\.zelenybor\.(by|com)/.test(href); // %%CHECK.ZELENYBOR%%
+			zelenybor = /(forum\.)?zelenybor\.(by|com)/.test(href); // %%CHECK.ZELENYBOR%%
 			
 			if (onliner == false && zelenybor == false)
 				return;
