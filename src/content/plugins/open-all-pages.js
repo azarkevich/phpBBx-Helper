@@ -272,26 +272,45 @@ function phpBBx_append_memberlist_page(page, div, host, before)
 	);
 }
 
-function phpBBx_append_all_next(pageToLoad, host, before)
+function phpBBx_append_all_next_ex()
 {
 	var pager = document.oz_data.pager;
 	if(pager == null)
 		return;
 	
-	if(pageToLoad == null)
+	var pageToLoad = pager.cur_page + 1;
+
+	var count = pager.max_page - pager.cur_page - 1;
+	
+	if(count < 0)
+		return;
+	
+	if(count > 10)
 	{
-		pageToLoad = pager.cur_page + 1;
-		
-		var an = document.execXPath("//a[@append_all_next_a]");
-		an.forEach(
-			function(a)
-			{
-				a.parentNode.removeChild(a);
-			}
-		);
+		count = window.prompt(window.oap_pages_count_title, count);
+		if(count == null)
+			return;
+		count = Number(count);
 	}
 	
-	if(pageToLoad > pager.max_page)
+	var lastPage = pageToLoad + count;
+	
+	var an = document.execXPath("//a[@append_all_next_a]");
+	an.forEach(
+		function(a)
+		{
+			a.parentNode.removeChild(a);
+		}
+	);
+	
+	phpBBx_append_all_next(pageToLoad, lastPage);
+}
+
+function phpBBx_append_all_next(pageToLoad, lastPage, host, before)
+{
+	var pager = document.oz_data.pager;
+
+	if(pageToLoad > pager.max_page || pageToLoad > lastPage)
 	{
 		// host != null only if at least one page appended
 		if(host != null)
@@ -335,13 +354,15 @@ function phpBBx_append_all_next(pageToLoad, host, before)
 	if(window.phpBBx_append_pages_dialog != null)
 	{
 		window.phpBBx_append_pages_dialog.showDialog(true);
-		window.phpBBx_append_pages_dialog.setProgressPage(pageToLoad, pager.max_page);
+		window.phpBBx_append_pages_dialog.setProgressPage(pageToLoad, lastPage);
 	}
 		
 	var from_post = (pageToLoad - 1) * pager.page_size;
 	var href = pager.href_template.replace(/&start=\d+/, "&start=" + from_post);
 	var httpRequest = new XMLHttpRequest();
 	httpRequest.open('GET', href, true);
+	if(document.phpBBx_site == 'olby')
+		httpRequest.overrideMimeType("text/html; charset=Windows-1251");
 	httpRequest.onreadystatechange = function()
 	{
 		try {
@@ -361,10 +382,14 @@ function phpBBx_append_all_next(pageToLoad, host, before)
 					phpBBx_append_memberlist_page(pageToLoad, div, host, before);
 				
 				// modify links to appended pages
-				var as = document.execXPath("//a[contains(@href, 'start=" + from_post + "')]");
+				var url_bit = 'start=' + from_post;
+				var as = document.execXPath("//a[contains(@href, '" + url_bit + "')]");
+				var re = new RegExp(url_bit + "$");
 				as.forEach(
 					function(a)
 					{
+						if(re.test(a.href) == false)
+							return;
 						if(document.phpBBx_site == 'olby')
 						{
 							a.className = 'active';
@@ -374,7 +399,7 @@ function phpBBx_append_all_next(pageToLoad, host, before)
 					}
 				);
 
-				phpBBx_append_all_next(pageToLoad + 1, host, before, false);
+				phpBBx_append_all_next(pageToLoad + 1, lastPage, host, before, false);
 			}
 			else if(httpRequest.readyState == 4 && httpRequest.status != 200)
 			{
@@ -414,7 +439,7 @@ function add_AllNext_buttons(doc)
 			var a = doc.createElement("a");
 			a.setAttribute('append_all_next_a', '');
 			a.textContent = OLBY.getString("append_all_next");
-			a.href = "javascript:phpBBx_append_all_next()";
+			a.href = "javascript:phpBBx_append_all_next_ex()";
 			linkPanel.insertBefore(a, nextPageButton);
 		}
 	}
@@ -424,7 +449,7 @@ function handleWindowName(doc)
 {
 	if(/sazarkevich-append-all-pages-from-this/.test(doc.defaultView.name))
 	{
-		phpBBx_install_script(doc, "phpBBx_append_all_next();");
+		phpBBx_install_script(doc, "phpBBx_append_all_next_ex();");
 	}
 	doc.defaultView.name = "";
 }
@@ -558,9 +583,11 @@ function modifyPage(doc)
 	phpBBx_install_script(doc, phpBBx_open_selected_topics);
 	phpBBx_install_script(doc, phpBBx_updated_topic_sel_unsel);
 	phpBBx_install_script(doc, phpBBx_append_all_next);
+	phpBBx_install_script(doc, phpBBx_append_all_next_ex);
 	phpBBx_install_script(doc, phpBBx_create_append_pages_dialog);
 	phpBBx_install_script(doc, phpBBx_append_viewtopic_page);
 	phpBBx_install_script(doc, phpBBx_append_memberlist_page);
+	phpBBx_install_script(doc, "window.oap_pages_count_title = '" + OLBY.getString("oap.count_pages") + "'");
 	
 	this.modifyTopicsList(doc);
 	this.modifyUnreadLinks(doc);
