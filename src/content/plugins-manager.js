@@ -1,5 +1,29 @@
 function phpBBx_getContentDir()
 {
+	var info = Components.classes["@mozilla.org/xre/app-info;1"]
+		.getService(Components.interfaces.nsIXULAppInfo);
+
+	if(/^4\.*/.test(info.version))
+		return phpBBx_getContentDir4();
+	else
+		return phpBBx_getContentDir3();
+}
+
+function phpBBx_getContentDir4()
+{
+	var directoryService = Components.classes["@mozilla.org/file/directory_service;1"].
+		getService(Ci.nsIProperties);
+
+	var dir = directoryService.get("ProfD", Components.interfaces.nsIFile);
+	dir.append("extensions");
+	dir.append("phpBBx-helper@sergey.azarkevich");
+	dir.append("content");
+	
+	return dir;
+}
+
+function phpBBx_getContentDir3()
+{
 	var il = Components.classes["@mozilla.org/extensions/manager;1"]
 			   .getService(Components.interfaces.nsIExtensionManager)
 			   .getInstallLocation("phpBBx-helper@sergey.azarkevich");

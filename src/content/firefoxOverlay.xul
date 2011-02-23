@@ -8,7 +8,7 @@
 	<statusbar id="status-bar">
 		<statusbarpanel id="phpBBx-helper-statusbar-panel"
 			class="statusbarpanel-menu-iconic"
-			tooltiptext="%EXT.NAME% (версия %EXT.VERSION%)"
+			tooltiptext="phpBBx Helper (версия %EXT.VERSION%)"
 			src="chrome://phpBBx-helper/skin/icon.png"
 			onclick="phpBBx_OnStatusPanelBtnClik(event);"
 			onload="phpBBx_eanbleChanged();" />
