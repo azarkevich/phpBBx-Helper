@@ -144,36 +144,22 @@ function phpBBx_OnUnload()
 	window.removeEventListener('unload', phpBBx_OnUnload, false);
 }
 
-window.addEventListener('load', phpBBx_OnLoad, false);
-window.addEventListener('unload', phpBBx_OnUnload, false);
+try{
+	window.addEventListener('load', phpBBx_OnLoad, false);
+	window.addEventListener('unload', phpBBx_OnUnload, false);
 
-phpBBx_prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
-		.getService(Components.interfaces.nsIPrefService)
-		.getBranch("extensions.phpBBx-helper.");
-phpBBx_prefBranch.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+	phpBBx_prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
+			.getService(Components.interfaces.nsIPrefService)
+			.getBranch("extensions.phpBBx-helper.");
+	phpBBx_prefBranch.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
 
-phpBBx_reloadEachTime = false;
-if(phpBBx_prefBranch.prefHasUserValue("ReloadEachTime"))
-	phpBBx_reloadEachTime = phpBBx_prefBranch.getBoolPref("ReloadEachTime");
+	phpBBx_reloadEachTime = false;
+	if(phpBBx_prefBranch.prefHasUserValue("ReloadEachTime"))
+		phpBBx_reloadEachTime = phpBBx_prefBranch.getBoolPref("ReloadEachTime");
 
-phpBBx_loadDependencies();
-/*
-var cacheService = Components.classes["@mozilla.org/network/cache-service;1"]
-	.getService(Components.interfaces.nsICacheService);
-
-var cacheVisitor =
+	phpBBx_loadDependencies();
+}
+catch(e)
 {
-	visitDevice: function(deviceId, di)
-	{
-		alert(di.description);
-		return true;
-	},
-	
-	visitEntry: function(deviceId, entryInfo)
-	{
-		return true;
-	}
- };	
-
-cacheService.visitEntries(cacheVisitor);
-*/
+	alert("Can't initialize phpBBx Helper plugin\n" + e);
+}
