@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0"?>
 <overlay xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
+	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/plugins/index.js' />
 	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/plugins-manager.js'/>
 	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/script-launcher.js'/>
 	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/utils.js' />
