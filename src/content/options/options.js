@@ -16,7 +16,7 @@ function phpBBx_buildOptions()
 	} 
 
 	oz_preferences = document.getElementById('preferences-plugins');
-	oz_prefwindow = document.getElementById('prefwindow-options');
+	oz_prefwindow = document.getElementById('phpBBx-prefwindow-options');
 	oz_prefpane = document.getElementById('plugins-holder');
 	
 	oz_olby.Plugins.forEach(
@@ -41,15 +41,6 @@ function phpBBx_buildOptions()
 				caption.setAttribute('label', plugin.name);
 				gb.appendChild(caption);
 				oz_prefpane.appendChild(gb);
-			}
-		
-			if(plugin.prefpage != null)
-			{
-				var pane = document.createElement('prefpane');
-				pane.id = plugin.prefpage_id == null ? plugin.name : plugin.prefpage_id;
-				pane.setAttribute('src', plugin.prefpage);
-				pane.label = plugin.prefpage_name == null ? plugin.name : plugin.prefpage_name;
-				oz_prefwindow.addPane(pane);
 			}
 		}
 	);

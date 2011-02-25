@@ -3,15 +3,14 @@
 <?xml-stylesheet href="chrome://phpBBx-helper/content/options/options.css" type="text/css"?>
 
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-			id="prefwindow-options"
+			id="phpBBx-prefwindow-options"
 			title="Настройки phpBBx helper" 
-			sizemode="normal"
-			persist="screenX screenY width height"
 			>
-	
+
 	<prefpane
 			 id="prefpane-general"
-			 label="Общие">
+			 label="Общие"
+			 >
 		<preferences>
 			<preference id="pref-ext-enable" name="extensions.phpBBx-helper.enabled" type="bool"/>
 		</preferences>
@@ -27,6 +26,20 @@
 		</preferences>
 		<vbox id='plugins-holder' height="400" flex="1" style="overflow:auto">
 		</vbox>
+	</prefpane>
+
+	<prefpane id="prefpane-ignore" label="Ignore">
+		<preferences>
+			<preference id="pref-ignore-users-enable" name="extensions.phpBBx-helper.ignore-users.enabled" type="bool"/>
+			<preference id="pref-ignore-users-users" name="extensions.phpBBx-helper.ignore-users.users" type="string"/>
+		</preferences>
+	
+		<groupbox>
+			<caption label="Игнорировать" />
+			<checkbox label="Разрешить" preference="pref-ignore-users-enable"/>
+			<textbox flex="1" preference="pref-ignore-users-users"/>
+		</groupbox>
+
 	</prefpane>
 
 	<script type='application/x-javascript' src='chrome://phpBBx-helper/content/options/options.js' />

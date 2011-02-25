@@ -49,8 +49,6 @@ function phpBBx_loadPlugins()
 		plugin.base_url = base_uri;
 		plugin.url = file;
 		loader.loadSubScript(plugin.url, plugin);
-		if(plugin.prefpage != null)
-			plugin.prefpage = base_uri + plugin.prefpage;
 		plugins.push(plugin);
 	}
 	return plugins;

@@ -79,5 +79,3 @@ this.modifyExpandedPage = this.modifyPage;
 
 // 'name', 'desc', 'defvaleu', 'visible'
 this.features.addFeature("enabled",  OLBY.getString('ignore-users')); //, true, false);
-this.prefpage = 'options.xul';
-this.prefpage_name = 'Ignore';
