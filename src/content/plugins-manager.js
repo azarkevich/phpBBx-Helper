@@ -3,29 +3,18 @@ function phpBBx_loadPlugins()
 	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
 		.getService(Components.interfaces.mozIJSSubScriptLoader);
 
+	var base_uri = 'chrome://phpBBx-helper/content/plugins/';
+	
 	var array = phpBBx_getPluginUrls();
 	var plugins = new Array();
 	for(var i=0;i<array.length;i++)
 	{
 		var file = array[i];
-		if(file.leafName == ".svn")
-			continue;
 
 		var plugin = new Object();
 
-		plugin.name = file.leafName.replace(/\.js$/, '');
-
-		var base_uri = 'chrome://phpBBx-helper/content/plugins/';
+		plugin.name = file.replace(/\.js$/, '').replace(/^([^\/]*\/)*/, '');
 		
-		if(file.isDirectory())
-		{
-			base_uri += file.leafName + "/";
-			file.append("plugin.js")
-		}
-
-		if(file.isFile() == false)
-			continue;
-
 		plugin.pref_branch_name = "extensions.phpBBx-helper." + plugin.name + ".";
 		plugin.pref_branch = Components.classes["@mozilla.org/preferences-service;1"]
 			.getService(Components.interfaces.nsIPrefService)
@@ -58,7 +47,7 @@ function phpBBx_loadPlugins()
 			);
 		}
 		plugin.base_url = base_uri;
-		plugin.url = base_uri + file.leafName;
+		plugin.url = file;
 		loader.loadSubScript(plugin.url, plugin);
 		if(plugin.prefpage != null)
 			plugin.prefpage = base_uri + plugin.prefpage;
