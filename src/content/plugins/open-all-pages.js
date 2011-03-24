@@ -219,6 +219,14 @@ function phpBBx_on_open_all_pages(e, plugin)
 	plugin.pref_branch.setCharPref('unselect-prev-' + page_id, save.join());
 }
 
+function phpBBx_auto_open_updated()
+{
+	if(/phpBBx-helper=autoopen/.test(window.location.href))
+	{
+		phpBBx_open_selected_topics(true);
+	}
+}
+
 function phpBBx_append_viewtopic_page(page, div, host, before)
 {
 	// page divider
@@ -607,11 +615,15 @@ function modifyPage(doc)
 
 function runPage(doc)
 {
-	phpBBx_install_script(doc, 'phpBBx_create_append_pages_dialog()');
+	phpBBx_install_script(doc, 'phpBBx_create_append_pages_dialog();');
 
 	this.handleWindowName(doc);
 
-	phpBBx_install_script(doc, 'phpBBx_updated_topic_check_changed(false)');
+	phpBBx_install_script(doc, 'phpBBx_updated_topic_check_changed(false);');
+
+	phpBBx_install_script(doc, phpBBx_auto_open_updated);
+	
+	phpBBx_install_script(doc, 'phpBBx_auto_open_updated();');
 }
 
 this.features.addFeature("enable_OpenAllNewTopics",  OLBY.getString("oap.enable_OpenAllNewTopics"));
