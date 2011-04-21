@@ -6,24 +6,9 @@
 
 	<property name="path.build.src" value="${path.build}/src/" />
 
-	<path id="project.classpath">
-		<pathelement location="svnjavahl.jar" /> 
-		<pathelement location="svnant.jar" />
-		<pathelement location="svnClientAdapter.jar" />
-	</path>
-  
-	<taskdef name="svn" classpathref="project.classpath"
-		    classname="org.tigris.subversion.svnant.SvnTask" />
-
 	<target name="getversion">
 
-		<svn>
-			<wcVersion path="${basedir}" />
-		</svn>
-
-		<property name="version.svn-revision" value="${revision.max}" />
-
-		<property name="version" value="${version.major}.${version.minor}.r${version.svn-revision}" />
+		<property name="version" value="${version.major}.${version.minor}.${version.revision}" />
 
 	</target>
 
@@ -32,9 +17,9 @@
 
 		<echo message="Build ${version}" />
 		
-		<svn>
-			<export srcPath="src" destPath="${path.build.src}" />
-		</svn>
+		<copy todir="${path.build}/src">
+			<fileset dir="src"/>
+		</copy>
 
 		<property name="xpi.name" value="phpBBx-${version}.xpi" />
 
